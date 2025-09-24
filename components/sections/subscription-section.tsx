@@ -3,8 +3,31 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Check, Star, Zap, Crown } from "lucide-react"
 import Link from "next/link"
+
+const CheckIcon = () => (
+  <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
+  </svg>
+)
+
+const StarIcon = () => (
+  <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.46,13.97L5.82,21L12,17.27Z" />
+  </svg>
+)
+
+const ZapIcon = () => (
+  <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M7,2V13H10V22L17,10H14L17,2H7Z" />
+  </svg>
+)
+
+const CrownIcon = () => (
+  <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M5,16L3,5L8.5,12L12,4L15.5,12L21,5L19,16H5M19,19A1,1 0 0,1 18,20H6A1,1 0 0,1 5,19V18H19V19Z" />
+  </svg>
+)
 
 const plans = [
   {
@@ -12,7 +35,7 @@ const plans = [
     price: "$29",
     period: "/month",
     description: "Perfect for small businesses getting started with automation.",
-    icon: Zap,
+    icon: ZapIcon,
     features: [
       "1 SaaS Product Access",
       "Basic AI Automation",
@@ -28,7 +51,7 @@ const plans = [
     price: "$99",
     period: "/month",
     description: "Ideal for growing businesses that need advanced automation features.",
-    icon: Star,
+    icon: StarIcon,
     features: [
       "3 SaaS Products Access",
       "Advanced AI Automation",
@@ -46,7 +69,7 @@ const plans = [
     price: "Custom",
     period: "",
     description: "Complete SaaS suite for large organizations with unlimited automation.",
-    icon: Crown,
+    icon: CrownIcon,
     features: [
       "All 5 SaaS Products",
       "Unlimited AI Automation",
@@ -101,7 +124,7 @@ export function SubscriptionSection() {
                 <div
                   className={`w-16 h-16 bg-${plan.color}/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-${plan.color}/20 transition-all duration-300 animate-pulse3d hover-rotate`}
                 >
-                  <plan.icon className={`h-8 w-8 text-${plan.color}`} />
+                  <plan.icon />
                 </div>
                 <CardTitle className="text-2xl group-hover:text-primary transition-colors">{plan.name}</CardTitle>
                 <div className="mt-4">
@@ -115,8 +138,8 @@ export function SubscriptionSection() {
                 <ul className="space-y-3">
                   {plan.features.map((feature, featureIndex) => (
                     <li key={feature} className={`flex items-center hover-lift delay-${featureIndex * 50}`}>
-                      <Check className={`h-4 w-4 text-${plan.color} mr-3 flex-shrink-0 animate-pulse3d`} />
-                      <span className="text-sm">{feature}</span>
+                      <CheckIcon />
+                      <span className="text-sm ml-3">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -129,9 +152,7 @@ export function SubscriptionSection() {
                     size="lg"
                   >
                     {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
-                    {plan.name !== "Enterprise" && (
-                      <Zap className="ml-2 h-4 w-4 transition-transform group-hover:scale-110" />
-                    )}
+                    {plan.name !== "Enterprise" && <ZapIcon />}
                   </Button>
                 </Link>
               </CardContent>
