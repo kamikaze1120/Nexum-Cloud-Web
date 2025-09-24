@@ -2,61 +2,46 @@
 
 @import "tailwindcss";
 
-/* ===========================
-   THEME (Tailwind v4 way)
-   =========================== */
+/* ========== THEME COLORS ========== */
 @theme {
-  --color-background: oklch(0.18 0.05 300); /* purple haze with black tint */
-  --color-foreground: oklch(0.98 0 0);      /* white text */
+  --color-background: oklch(0.15 0.04 60);  /* deep warm brown */
+  --color-foreground: oklch(0.98 0 0);      /* soft white text */
 
-  --color-card: oklch(0.22 0.05 300);
-  --color-card-foreground: var(--color-foreground);
+  --color-card: oklch(0.18 0.03 60);        /* slightly lighter brown */
+  --color-card-foreground: oklch(0.98 0 0);
 
-  --color-popover: oklch(0.22 0.05 300);
-  --color-popover-foreground: var(--color-foreground);
+  --color-popover: oklch(0.18 0.03 60);
+  --color-popover-foreground: oklch(0.98 0 0);
 
-  --color-primary: oklch(0.25 0.1 300); /* slightly richer purple */
+  --color-primary: oklch(0.65 0.15 40);     /* warm earthy orange accent */
   --color-primary-foreground: oklch(0.98 0 0);
 
-  --color-secondary: oklch(0.14 0.02 300);
-  --color-secondary-foreground: oklch(0.9 0 0);
+  --color-secondary: oklch(0.3 0.04 60);    /* muted dark brown */
+  --color-secondary-foreground: oklch(0.95 0 0);
 
-  --color-muted: oklch(0.14 0.02 300);
-  --color-muted-foreground: oklch(0.65 0 0);
+  --color-muted: oklch(0.25 0.03 60);       /* darker muted brown */
+  --color-muted-foreground: oklch(0.75 0.02 60);
 
-  --color-accent: oklch(0.3 0.1 300);
+  --color-accent: oklch(0.55 0.1 70);       /* warm golden accent */
   --color-accent-foreground: oklch(0.98 0 0);
 
-  --color-destructive: oklch(0.6 0.2 27);
+  --color-destructive: oklch(0.55 0.18 25); /* muted red-brown */
   --color-destructive-foreground: oklch(0.98 0 0);
 
-  --color-border: oklch(0.22 0.02 300);
-  --color-input: oklch(0.22 0.02 300);
-  --color-ring: oklch(0.35 0.1 300);
+  --color-border: oklch(0.25 0.03 60);
+  --color-input: oklch(0.25 0.03 60);
+  --color-ring: oklch(0.4 0.05 60);
+
+  --color-chart-1: oklch(0.65 0.18 40);     /* warm oranges */
+  --color-chart-2: oklch(0.55 0.15 70);     /* golden brown */
+  --color-chart-3: oklch(0.45 0.1 90);      /* olive tone */
+  --color-chart-4: oklch(0.65 0.2 20);      /* rust red */
+  --color-chart-5: oklch(0.55 0.12 50);     /* muted cocoa */
 
   --radius: 0.625rem;
-
-  /* Charts */
-  --color-chart-1: oklch(0.65 0.22 41);
-  --color-chart-2: oklch(0.6 0.12 185);
-  --color-chart-3: oklch(0.4 0.07 227);
-  --color-chart-4: oklch(0.83 0.19 84);
-  --color-chart-5: oklch(0.77 0.19 70);
-
-  /* Sidebar */
-  --color-sidebar: oklch(0.16 0.03 300);
-  --color-sidebar-foreground: var(--color-foreground);
-  --color-sidebar-primary: oklch(0.25 0.1 300);
-  --color-sidebar-primary-foreground: oklch(0.98 0 0);
-  --color-sidebar-accent: oklch(0.3 0.1 300);
-  --color-sidebar-accent-foreground: oklch(0.98 0 0);
-  --color-sidebar-border: oklch(0.22 0.02 300);
-  --color-sidebar-ring: oklch(0.35 0.1 300);
 }
 
-/* ===========================
-   BASE STYLES
-   =========================== */
+/* ========== BASE STYLES ========== */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -68,28 +53,17 @@
     font-synthesis: none;
     text-rendering: optimizeLegibility;
   }
-
-  /* Scrollbar styling */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--color-background);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-primary);
-    border-radius: 4px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-accent);
-  }
 }
 
-/* ===========================
-   ANIMATIONS & CUSTOM CLASSES
-   =========================== */
-/* Keep your animations/custom stuff here (unchanged).
-   Example placeholder if you had them:
-   .fade-in { animation: fadeIn 0.3s ease-in; }
-   @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-*/
+/* ========== SCROLLBAR STYLING ========== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {

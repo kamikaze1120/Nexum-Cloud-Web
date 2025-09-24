@@ -36,7 +36,11 @@ export function SignupForm() {
         email,
         password,
         options: {
-          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/onboarding`,
+          emailRedirectTo:
+            process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ||
+            (typeof window !== "undefined" && window.location.hostname === "localhost"
+              ? `${window.location.origin}/onboarding`
+              : `https://nexum-cloud.vercel.app/onboarding`),
         },
       })
 
