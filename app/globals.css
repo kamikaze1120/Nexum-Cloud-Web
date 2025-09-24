@@ -1,69 +1,125 @@
-/*@import "tw-animate-css";*/
+@import "tailwindcss"
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@import "tailwindcss";
-
-/* ========== THEME COLORS ========== */
-@theme {
-  --color-background: oklch(0.15 0.04 60);  /* deep warm brown */
-  --color-foreground: oklch(0.98 0 0);      /* soft white text */
-
-  --color-card: oklch(0.18 0.03 60);        /* slightly lighter brown */
-  --color-card-foreground: oklch(0.98 0 0);
-
-  --color-popover: oklch(0.18 0.03 60);
-  --color-popover-foreground: oklch(0.98 0 0);
-
-  --color-primary: oklch(0.65 0.15 40);     /* warm earthy orange accent */
-  --color-primary-foreground: oklch(0.98 0 0);
-
-  --color-secondary: oklch(0.3 0.04 60);    /* muted dark brown */
-  --color-secondary-foreground: oklch(0.95 0 0);
-
-  --color-muted: oklch(0.25 0.03 60);       /* darker muted brown */
-  --color-muted-foreground: oklch(0.75 0.02 60);
-
-  --color-accent: oklch(0.55 0.1 70);       /* warm golden accent */
-  --color-accent-foreground: oklch(0.98 0 0);
-
-  --color-destructive: oklch(0.55 0.18 25); /* muted red-brown */
-  --color-destructive-foreground: oklch(0.98 0 0);
-
-  --color-border: oklch(0.25 0.03 60);
-  --color-input: oklch(0.25 0.03 60);
-  --color-ring: oklch(0.4 0.05 60);
-
-  --color-chart-1: oklch(0.65 0.18 40);     /* warm oranges */
-  --color-chart-2: oklch(0.55 0.15 70);     /* golden brown */
-  --color-chart-3: oklch(0.45 0.1 90);      /* olive tone */
-  --color-chart-4: oklch(0.65 0.2 20);      /* rust red */
-  --color-chart-5: oklch(0.55 0.12 50);     /* muted cocoa */
-
+/* Theme variables */
+:root {
+  --background: oklch(0.08 0.05 35);       /* warm dark brown */
+  --foreground: oklch(0.95 0 0);           /* off-white text */
+  --card: oklch(0.15 0.04 35);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.15 0.04 35);
+  --popover-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.6 0.12 25);           /* main warm accent */
+  --primary-foreground: oklch(0.95 0 0);
+  --secondary: oklch(0.35 0.06 35);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.3 0.05 35);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.55 0.08 45);
+  --accent-foreground: oklch(0.95 0 0);
+  --destructive: oklch(0.55 0.18 25);
+  --destructive-foreground: oklch(0.95 0 0);
+  --border: oklch(0.25 0.03 35);
+  --input: oklch(0.25 0.03 35);
+  --ring: oklch(0.4 0.05 35);
   --radius: 0.625rem;
+
+  /* Animation variables */
+  --anim-spin: rotate 1s linear infinite;
+  --anim-fade: fadeIn 0.5s ease-in-out forwards;
 }
 
-/* ========== BASE STYLES ========== */
+/* Dark theme overrides */
+.dark {
+  --background: oklch(0.05 0.05 25);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.08 0.04 25);
+  --card-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.55 0.1 20);
+  --primary-foreground: oklch(0.95 0 0);
+  --secondary: oklch(0.25 0.03 25);
+  --secondary-foreground: oklch(0.95 0 0);
+  --accent: oklch(0.5 0.08 35);
+  --accent-foreground: oklch(0.95 0 0);
+  --border: oklch(0.2 0.03 25);
+  --input: oklch(0.2 0.03 25);
+  --ring: oklch(0.35 0.05 25);
+}
+
+/* Keyframes for animations */
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Base layer */
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    outline-color: var(--ring);
+    border-color: var(--border);
+    transition: all 0.2s ease-in-out;
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--background);
+    color: var(--foreground);
     font-feature-settings: "rlig" 1, "calt" 1;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
   }
-}
 
-/* ========== SCROLLBAR STYLING ========== */
-::-webkit-scrollbar {
-  width: 8px;
+  /* Card styling */
+  .card {
+    background-color: var(--card);
+    color: var(--card-foreground);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    padding: 1rem;
+  }
+
+  /* Popover styling */
+  .popover {
+    background-color: var(--popover);
+    color: var(--popover-foreground);
+    border-radius: var(--radius);
+    padding: 0.75rem;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.35);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+  }
+
+  /* Animations */
+  .spin { animation: var(--anim-spin); }
+  .fade-in { animation: var(--anim-fade); }
+
+  /* Hover effects */
+  .hover-primary:hover {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .hover-accent:hover {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
 }
-::-webkit-scrollbar-track {
-  background: var(--color-background);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
