@@ -209,7 +209,156 @@
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Added floating animation for dynamic elements */
+/* Gradient text effect */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background: var(--gradient-primary);
+  }
+  50% {
+    background: var(--gradient-secondary);
+  }
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px oklch(0.65 0.25 280 / 0.4), 0 0 60px oklch(0.75 0.2 320 / 0.2);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* 3D animations */
+.animate-fadeInUp3d {
+  animation: fadeInUp3d 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0;
+  transform: translateY(30px) rotateX(10deg);
+}
+
+@keyframes fadeInUp3d {
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+.animate-pulse3d {
+  animation: pulse3d 2s ease-in-out infinite;
+}
+
+@keyframes pulse3d {
+  0%,
+  100% {
+    transform: scale(1) rotateY(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05) rotateY(5deg);
+    opacity: 0.8;
+  }
+}
+
+.animate-rotate3d {
+  animation: rotate3d 4s linear infinite;
+}
+
+@keyframes rotate3d {
+  from {
+    transform: rotateY(0deg) rotateX(0deg);
+  }
+  to {
+    transform: rotateY(360deg) rotateX(360deg);
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px oklch(0.65 0.25 280 / 0.5), 0 0 20px oklch(0.75 0.2 320 / 0.3);
+  }
+  to {
+    text-shadow: 0 0 20px oklch(0.65 0.25 280 / 0.8), 0 0 40px oklch(0.75 0.2 320 / 0.5);
+  }
+}
+
+.animate-morphing {
+  animation: morphing 6s ease-in-out infinite;
+}
+
+@keyframes morphing {
+  0%,
+  100% {
+    border-radius: 50%;
+  }
+  25% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  50% {
+    border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+  }
+  75% {
+    border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%;
+  }
+}
+
+.animate-particle {
+  animation: particle 8s linear infinite;
+}
+
+@keyframes particle {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(50px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Floating animations */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 3s ease-in-out infinite;
+}
+
 @keyframes float {
   0%,
   100% {
@@ -220,16 +369,46 @@
   }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+@keyframes float-reverse {
+  0%,
+  100% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
 }
 
-.animate-float-delayed {
-  animation: float 3s ease-in-out infinite;
-  animation-delay: 1.5s;
+/* 3D perspective utilities */
+.perspective-2000 {
+  perspective: 2000px;
 }
 
-/* Added pulse glow effect */
+.transform-3d {
+  transform-style: preserve-3d;
+}
+
+/* Particles background */
+.particles-bg {
+  position: relative;
+  background: var(--gradient-primary);
+  background-attachment: fixed;
+}
+
+.particles-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, oklch(0.65 0.25 280 / 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, oklch(0.75 0.2 320 / 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, oklch(0.55 0.3 240 / 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Enhanced pulse glow effect */
 @keyframes pulse-glow {
   0%,
   100% {
