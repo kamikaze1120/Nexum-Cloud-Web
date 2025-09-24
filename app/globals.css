@@ -4,46 +4,47 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated to darker theme with better contrast inspired by SPINX Digital */
-  --background: #0a0a0a;
-  --foreground: #f8fafc;
-  --card: #111111;
-  --card-foreground: #f8fafc;
-  --popover: #111111;
-  --popover-foreground: #f8fafc;
-  --primary: #10b981;
-  --primary-foreground: #ffffff;
-  --secondary: #1e293b;
-  --secondary-foreground: #f1f5f9;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --accent: #0891b2;
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #334155;
-  --input: #1e293b;
-  --ring: #10b981;
-  --chart-1: #10b981;
-  --chart-2: #0891b2;
-  --chart-3: #8b5cf6;
-  --chart-4: #f59e0b;
-  --chart-5: #ef4444;
-  --radius: 0.75rem;
-  --sidebar: #111111;
-  --sidebar-foreground: #f8fafc;
-  --sidebar-primary: #10b981;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1e293b;
-  --sidebar-accent-foreground: #f1f5f9;
-  --sidebar-border: #334155;
-  --sidebar-ring: #10b981;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 @theme inline {
-  /* Added font family configuration for Tailwind CSS v4 */
+  /* Font family configuration for Tailwind CSS v4 */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Color system */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -274,15 +275,10 @@
 
 @layer base {
   * {
-    /* Updated border colors for dark theme */
-    border-color: hsl(var(--border));
-    outline-color: rgba(16, 185, 129, 0.2);
+    @apply border-border outline-ring/50;
   }
-
   body {
-    /* Set dark theme as default with better contrast */
-    background-color: var(--background);
-    color: var(--foreground);
+    @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
