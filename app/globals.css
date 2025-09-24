@@ -1,73 +1,95 @@
+/*@import "tw-animate-css";*/
+
 @import "tailwindcss";
-@import "tw-animate-css";
 
-:root {
-  --background: oklch(0.15 0.03 30);         /* Deep warm brown-black */
-  --foreground: oklch(0.95 0.02 80);         /* Soft cream text */
-  --card: oklch(0.2 0.04 40);                /* Warm dark brown card */
-  --card-foreground: oklch(0.95 0.02 80);    /* Cream text on cards */
-  --popover: oklch(0.18 0.04 35);            /* Slightly lighter warm brown */
-  --popover-foreground: oklch(0.95 0.02 80); /* Light text */
-  --primary: oklch(0.55 0.15 30);            /* Amber / warm gold */
-  --primary-foreground: oklch(0.1 0.02 20);  /* Dark text on amber */
-  --secondary: oklch(0.3 0.05 300);          /* Warm muted purple haze */
-  --secondary-foreground: oklch(0.95 0.02 80);
-  --muted: oklch(0.25 0.03 40);              /* Warm muted brown */
-  --muted-foreground: oklch(0.75 0.05 60);   /* Muted tan text */
-  --accent: oklch(0.45 0.12 20);             /* Burnt orange accent */
-  --accent-foreground: oklch(0.95 0.02 80);
-  --destructive: oklch(0.45 0.2 25);         /* Warm deep red */
-  --destructive-foreground: oklch(0.95 0.02 80);
-  --border: oklch(0.25 0.03 40);             /* Dark warm borders */
-  --input: oklch(0.25 0.03 40);
-  --ring: oklch(0.55 0.12 30);               /* Golden amber focus ring */
-  --chart-1: oklch(0.55 0.15 30);            /* Amber */
-  --chart-2: oklch(0.6 0.12 300);            /* Purple haze */
-  --chart-3: oklch(0.45 0.12 20);            /* Burnt orange */
-  --chart-4: oklch(0.5 0.1 100);             /* Olive green */
-  --chart-5: oklch(0.45 0.18 360);           /* Warm red */
+/* ===========================
+   THEME (Tailwind v4 way)
+   =========================== */
+@theme {
+  --color-background: oklch(0.18 0.05 300); /* purple haze with black tint */
+  --color-foreground: oklch(0.98 0 0);      /* white text */
+
+  --color-card: oklch(0.22 0.05 300);
+  --color-card-foreground: var(--color-foreground);
+
+  --color-popover: oklch(0.22 0.05 300);
+  --color-popover-foreground: var(--color-foreground);
+
+  --color-primary: oklch(0.25 0.1 300); /* slightly richer purple */
+  --color-primary-foreground: oklch(0.98 0 0);
+
+  --color-secondary: oklch(0.14 0.02 300);
+  --color-secondary-foreground: oklch(0.9 0 0);
+
+  --color-muted: oklch(0.14 0.02 300);
+  --color-muted-foreground: oklch(0.65 0 0);
+
+  --color-accent: oklch(0.3 0.1 300);
+  --color-accent-foreground: oklch(0.98 0 0);
+
+  --color-destructive: oklch(0.6 0.2 27);
+  --color-destructive-foreground: oklch(0.98 0 0);
+
+  --color-border: oklch(0.22 0.02 300);
+  --color-input: oklch(0.22 0.02 300);
+  --color-ring: oklch(0.35 0.1 300);
+
   --radius: 0.625rem;
-  --sidebar: oklch(0.18 0.03 30);            /* Sidebar warm dark */
-  --sidebar-foreground: oklch(0.95 0.02 80);
-  --sidebar-primary: oklch(0.55 0.15 30);    /* Sidebar golden highlight */
-  --sidebar-primary-foreground: oklch(0.1 0.02 20);
-  --sidebar-accent: oklch(0.3 0.05 300);     /* Sidebar purple haze */
-  --sidebar-accent-foreground: oklch(0.95 0.02 80);
-  --sidebar-border: oklch(0.25 0.03 40);
-  --sidebar-ring: oklch(0.55 0.12 30);
+
+  /* Charts */
+  --color-chart-1: oklch(0.65 0.22 41);
+  --color-chart-2: oklch(0.6 0.12 185);
+  --color-chart-3: oklch(0.4 0.07 227);
+  --color-chart-4: oklch(0.83 0.19 84);
+  --color-chart-5: oklch(0.77 0.19 70);
+
+  /* Sidebar */
+  --color-sidebar: oklch(0.16 0.03 300);
+  --color-sidebar-foreground: var(--color-foreground);
+  --color-sidebar-primary: oklch(0.25 0.1 300);
+  --color-sidebar-primary-foreground: oklch(0.98 0 0);
+  --color-sidebar-accent: oklch(0.3 0.1 300);
+  --color-sidebar-accent-foreground: oklch(0.98 0 0);
+  --color-sidebar-border: oklch(0.22 0.02 300);
+  --color-sidebar-ring: oklch(0.35 0.1 300);
 }
 
-.dark {
-  --background: oklch(0.12 0.03 30);         /* Even darker brown-black */
-  --foreground: oklch(0.95 0.02 80);
-  --card: oklch(0.16 0.03 35);
-  --card-foreground: oklch(0.95 0.02 80);
-  --popover: oklch(0.15 0.03 30);
-  --popover-foreground: oklch(0.95 0.02 80);
-  --primary: oklch(0.55 0.15 30);            /* Golden amber stays consistent */
-  --primary-foreground: oklch(0.1 0.02 20);
-  --secondary: oklch(0.35 0.05 300);         /* Richer purple haze */
-  --secondary-foreground: oklch(0.95 0.02 80);
-  --muted: oklch(0.2 0.03 40);
-  --muted-foreground: oklch(0.7 0.05 60);
-  --accent: oklch(0.45 0.12 20);
-  --accent-foreground: oklch(0.95 0.02 80);
-  --destructive: oklch(0.42 0.18 25);        /* Deep warm red */
-  --destructive-foreground: oklch(0.95 0.02 80);
-  --border: oklch(0.2 0.03 40);
-  --input: oklch(0.2 0.03 40);
-  --ring: oklch(0.55 0.12 30);
-  --chart-1: oklch(0.55 0.15 30);
-  --chart-2: oklch(0.6 0.12 300);
-  --chart-3: oklch(0.45 0.12 20);
-  --chart-4: oklch(0.5 0.1 100);
-  --chart-5: oklch(0.45 0.18 360);
-  --sidebar: oklch(0.12 0.03 30);
-  --sidebar-foreground: oklch(0.95 0.02 80);
-  --sidebar-primary: oklch(0.55 0.15 30);
-  --sidebar-primary-foreground: oklch(0.1 0.02 20);
-  --sidebar-accent: oklch(0.35 0.05 300);
-  --sidebar-accent-foreground: oklch(0.95 0.02 80);
-  --sidebar-border: oklch(0.2 0.03 40);
-  --sidebar-ring: oklch(0.55 0.12 30);
+/* ===========================
+   BASE STYLES
+   =========================== */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+  }
 }
+
+/* ===========================
+   ANIMATIONS & CUSTOM CLASSES
+   =========================== */
+/* Keep your animations/custom stuff here (unchanged).
+   Example placeholder if you had them:
+   .fade-in { animation: fadeIn 0.3s ease-in; }
+   @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+*/
