@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@supabase/ssr": "latest",
-    "@supabase/supabase-js": "^2.71.1",
+    "@supabase/supabase-js": "^2.45.4",
     "@vercel/analytics": "latest",
     "axios": "latest",
     "class-variance-authority": "^0.7.1",
