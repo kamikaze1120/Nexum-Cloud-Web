@@ -46,20 +46,20 @@ export default async function DashboardPage() {
     <div className="min-h-screen bg-background">
       <Header />
       <HomeButton />
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
+      <div className="container mx-auto px-4 py-8 animate-in slide-in-from-bottom-2 duration-500 ease-out">
+        <div className="mb-8 animate-fadeInUp3d">
           <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
           <p className="text-muted-foreground mt-2">Welcome back, {profile?.full_name || user.email}</p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Current Subscription */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 animate-fadeInUp3d hover-lift">
             <SubscriptionCard subscription={subscription} />
           </div>
 
           {/* Quick Stats */}
-          <Card>
+          <Card className="animate-fadeInUp3d hover-lift">
             <CardHeader>
               <CardTitle>Account Status</CardTitle>
             </CardHeader>
@@ -84,10 +84,14 @@ export default async function DashboardPage() {
 
         <div className="grid gap-6 mt-8 lg:grid-cols-2">
           {/* Billing History */}
-          <BillingHistory history={billingHistory || []} />
+          <div className="animate-fadeInUp3d hover-lift">
+            <BillingHistory history={billingHistory || []} />
+          </div>
 
           {/* Profile Settings */}
-          <ProfileSettings profile={profile} user={user} />
+          <div className="animate-fadeInUp3d hover-lift">
+            <ProfileSettings profile={profile} user={user} />
+          </div>
         </div>
       </div>
       <Footer />
