@@ -5,7 +5,9 @@ import { createClient } from "@/lib/supabase/server"
 export async function POST(request: Request) {
   try {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
@@ -16,9 +18,15 @@ export async function POST(request: Request) {
     }
 
     const apiKey = process.env.OPENAI_API_KEY
+    if (!apiKey) {
+      const reply =
+        "Thanks for your message. Our AI is currently in free mode. Enable the OPENAI_API_KEY for full fintech guidance. Meanwhile, what can I help you with—subscriptions, integrations, or dashboard setup?"
+      return NextResponse.json({ reply })
+    }
+
     const openai = new OpenAI({ apiKey })
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "anthropic/claude-3.5-sonnet",
       temperature: 0.2,
       messages: [
         {
@@ -30,7 +38,7 @@ export async function POST(request: Request) {
       ],
     })
 
-    const reply = completion.choices?.[0]?.message?.content ?? "I’m here to help. Could you share more details?"
+    const reply = completion.choices?.[0]?.message?.content ?? "I'm here to help. Could you share more details?"
     return NextResponse.json({ reply })
   } catch (err) {
     console.error("AI route error:", err)
