@@ -1,10 +1,17 @@
-content: [
-  "./pages/**/*.{js,ts,jsx,tsx}",
-  "./components/**/*.{js,ts,jsx,tsx}",
-  "./src/**/*.{html,js}",
-  "./*.html",
-  // Add these if you have them:
-  "./layouts/**/*.{js,ts,jsx,tsx}",
-  "./public/**/*.html",
-  "./styles/**/*.css",
-],
+module.exports = {
+  content: [
+    
+    // Add these for app folder
+    "./app/**/*.{js,ts,jsx,tsx,md,mdx}", // All file types in app
+    "./app/*.{js,ts,jsx,tsx,md,mdx}",    // Root files in app
+        "*.{js,ts,jsx,tsx,mdx}"
+    ],
+  theme: {
+    extend: {
+      fontFamily: {
+        'sans': ['Inter', 'system-ui', 'sans-serif'],
+      },
+    }
+  },
+  plugins: []
+}
