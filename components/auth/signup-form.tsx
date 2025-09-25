@@ -24,26 +24,26 @@ export function SignupForm() {
     e.preventDefault()
     setLoading(true)
     setError(null)
-
+  
     if (password !== confirmPassword) {
       setError("Passwords do not match")
       setLoading(false)
       return
     }
-
+  
     try {
+      const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL 
+        ? `${process.env.NEXT_PUBLIC_SITE_URL}/onboarding`
+        : `${window.location.origin}/onboarding`;
+  
       const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo:
-            process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ||
-            (typeof window !== "undefined" && window.location.hostname === "localhost"
-              ? `${window.location.origin}/onboarding`
-              : `https://nexum-cloud.vercel.app/onboarding`),
+          emailRedirectTo: redirectUrl,
         },
-      })
-
+      });
+  
       if (error) {
         setError(error.message)
       } else {

@@ -1,7 +1,7 @@
 "use client"
 
 import { HomeButton } from "@/components/ui/home-button"
-import { ChatBot } from "@/components/ui/chat-bot"
+// Remove this line: import { ChatBot } from "@/components/ui/chat-bot"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -45,7 +45,7 @@ export default function SupportPage() {
   return (
     <div className="min-h-screen bg-background particles-bg">
       <HomeButton />
-      <ChatBot />
+      {/* Remove this line: <ChatBot /> */}
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
         {/* Hero Section */}
