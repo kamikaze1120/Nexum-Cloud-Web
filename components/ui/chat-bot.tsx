@@ -22,7 +22,6 @@ export function ChatBot() {
         body: JSON.stringify({ message: sendingText }),
       })
       const data = await res.json()
-
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: (data && data.reply) ? data.reply : getBotResponse(sendingText),

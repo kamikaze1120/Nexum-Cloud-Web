@@ -16,12 +16,6 @@ export async function POST(request: Request) {
     }
 
     const apiKey = process.env.OPENAI_API_KEY
-    if (!apiKey) {
-      const reply =
-        "Thanks for your message. Our AI is currently in free mode. Enable the OPENAI_API_KEY for full fintech guidance. Meanwhile, what can I help you with—subscriptions, integrations, or dashboard setup?"
-      return NextResponse.json({ reply })
-    }
-
     const openai = new OpenAI({ apiKey })
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
