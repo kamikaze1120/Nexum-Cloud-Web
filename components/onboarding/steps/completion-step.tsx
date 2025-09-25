@@ -3,7 +3,8 @@ export function CompletionStep({ formData, user }: CompletionStepProps) {
     if (formData.selectedPlan && formData.paymentMethod === "connected") {
       createSubscription()
     } else {
-      createDefaultFreeAiSubscription()
+      // No free plan assignment; complete onboarding without creating a subscription
+      setSubscriptionCreated(true)
     }
   }, [])
   const createDefaultFreeAiSubscription = async () => {

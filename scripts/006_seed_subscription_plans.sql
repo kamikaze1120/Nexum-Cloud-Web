@@ -1,17 +1,4 @@
 -- Create default subscription plans for the platform
-INSERT INTO public.subscription_plans (name, price_monthly, price_yearly, features, is_active)
-VALUES (
-  'Nexum AI Free',
-  0,
-  0,
-  ARRAY[
-    'AI assistant (basic responses)',
-    'Up to 20 messages/day',
-    'Community support',
-    'Dashboard access'
-  ],
-  true
-);
 INSERT INTO subscription_plans (name, description, price_monthly, price_yearly, features, max_users, max_storage_gb) VALUES
 (
   'Starter',

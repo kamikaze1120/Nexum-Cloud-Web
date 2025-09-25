@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const apiKey = process.env.OPENAI_API_KEY
     if (!apiKey) {
       const reply =
-        "Thanks for your message. Our AI is currently in free mode. Enable the OPENAI_API_KEY for full fintech guidance. Meanwhile, what can I help you with—subscriptions, integrations, or dashboard setup?"
+        "AI replies are currently unavailable because no OPENAI_API_KEY is configured. Please add your API key to enable full AI guidance. What can I help you with—subscriptions, integrations, or dashboard setup?"
       return NextResponse.json({ reply })
     }
 
