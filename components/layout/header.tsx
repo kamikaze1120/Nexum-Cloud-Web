@@ -24,6 +24,9 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
+            <Link href="/websites" className="text-foreground hover:text-primary transition-colors hover-lift">
+              Websites
+            </Link>
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center text-foreground hover:text-primary transition-colors hover-lift">
                 Services
@@ -82,9 +85,9 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link href="/support" className="text-foreground hover:text-primary transition-colors hover-lift">
-              Support
-            </Link>
+              <Link href="/support" className="text-foreground hover:text-primary transition-colors hover-lift">
+                Support
+              </Link>
           </nav>
 
           {/* Desktop Auth Buttons */}
@@ -110,6 +113,9 @@ export function Header() {
           <div className="md:hidden py-4 border-t animate-fadeInUp3d">
             <nav className="flex flex-col space-y-4">
               <div className="space-y-2">
+                <Link href="/websites" className="block text-foreground hover:text-primary transition-colors hover-lift">
+                  Websites
+                </Link>
                 <div className="font-semibold text-primary">Services</div>
                 <div className="pl-4 space-y-2">
                   <Link

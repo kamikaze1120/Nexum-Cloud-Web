@@ -17,14 +17,19 @@ export function Footer() {
             </p>
           </div>
 
-          <div>
-            <h3 className="font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li>
-                <Link href="/services/cloud-infrastructure" className="hover:text-primary transition-colors hover-lift">
-                  Cloud Infrastructure
-                </Link>
-              </li>
+  <div>
+    <h3 className="font-semibold mb-4">Services</h3>
+    <ul className="space-y-2 text-muted-foreground">
+      <li>
+        <Link href="/websites" className="hover:text-primary transition-colors hover-lift">
+          Custom Websites
+        </Link>
+      </li>
+      <li>
+        <Link href="/services/cloud-infrastructure" className="hover:text-primary transition-colors hover-lift">
+          Cloud Infrastructure
+        </Link>
+      </li>
               <li>
                 <Link href="/services/data-management" className="hover:text-primary transition-colors hover-lift">
                   Data Management
@@ -96,8 +101,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t mt-12 pt-8 text-center text-muted-foreground">
+        <div className="border-t mt-12 pt-6 text-center text-muted-foreground space-y-2">
           <p>&copy; 2025 Nexum Cloud LLC. All rights reserved.</p>
+          <p>
+            New: <a href="https://rtail.vercel.app" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">rtail.vercel.app</a> — created by Nexum Cloud
+          </p>
         </div>
       </div>
     </footer>

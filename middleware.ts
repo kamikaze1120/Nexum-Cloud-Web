@@ -5,15 +5,43 @@ export async function middleware(request: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-  // If Supabase credentials are not available, skip authentication entirely
-  if (!supabaseUrl || !supabaseAnonKey) {
-    console.log("[v0] Middleware - Supabase not configured, skipping auth checks")
-    return NextResponse.next()
+  // Enforce HTTPS in production
+  const proto = request.headers.get("x-forwarded-proto")
+  if (process.env.NODE_ENV === "production" && proto === "http") {
+    const url = request.nextUrl.clone()
+    url.protocol = "https"
+    return NextResponse.redirect(url)
   }
 
   let supabaseResponse = NextResponse.next({
     request,
   })
+
+  // CSRF token management
+  const method = request.method
+  const pathname = request.nextUrl.pathname
+  const protectedPost =
+    method === "POST" && (pathname.startsWith("/api/contracts") || pathname.startsWith("/api/payments"))
+
+  const existingCsrf = request.cookies.get("csrf-token")?.value
+  if (!existingCsrf) {
+    const token = crypto.randomUUID()
+    supabaseResponse.cookies.set("csrf-token", token, { httpOnly: false, sameSite: "lax", secure: process.env.NODE_ENV === "production" })
+  }
+
+  if (protectedPost) {
+    const headerToken = request.headers.get("x-csrf-token")
+    const cookieToken = request.cookies.get("csrf-token")?.value
+    if (!headerToken || !cookieToken || headerToken !== cookieToken) {
+      return NextResponse.json({ error: "Invalid CSRF token" }, { status: 403 })
+    }
+  }
+
+  // If Supabase credentials are not available, skip authentication entirely
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.log("[v0] Middleware - Supabase not configured, skipping auth checks")
+    return NextResponse.next()
+  }
 
   try {
     const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {

@@ -25,6 +25,23 @@ export default async function AdminDashboard() {
     redirect("/login")
   }
 
+  // Role check: only admins allowed
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("is_admin, full_name")
+    .eq("id", user.id)
+    .single()
+
+  const adminEmailsEnv = (process.env.ADMIN_EMAILS || process.env.NEXT_PUBLIC_ADMIN_EMAILS || "")
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean)
+  const isAdminEmail = adminEmailsEnv.includes((user.email || "").toLowerCase())
+
+  if (!profile?.is_admin && !isAdminEmail) {
+    redirect("/dashboard")
+  }
+
   // Fetch dashboard statistics
   const [
     { count: totalPosts },
@@ -33,6 +50,9 @@ export default async function AdminDashboard() {
     { count: newsletterSubscriptions },
     { data: recentPosts },
     { data: recentContacts },
+    { count: totalContracts },
+    { count: signedContracts },
+    { count: paidTransactions },
   ] = await Promise.all([
     supabase.from("blog_posts").select("*", { count: "exact", head: true }),
     supabase.from("blog_posts").select("*", { count: "exact", head: true }).eq("published", true),
@@ -48,6 +68,9 @@ export default async function AdminDashboard() {
       .select("id, name, email, subject, created_at, status")
       .order("created_at", { ascending: false })
       .limit(5),
+    supabase.from("contracts").select("*", { count: "exact", head: true }),
+    supabase.from("contracts").select("*", { count: "exact", head: true }).eq("status", "signed"),
+    supabase.from("mentom_transactions").select("*", { count: "exact", head: true }).eq("status", "paid"),
   ])
 
   const stats = [
@@ -82,6 +105,22 @@ export default async function AdminDashboard() {
       icon: TrendingUp,
       color: "text-orange-600",
       bgColor: "bg-orange-50",
+    },
+    {
+      title: "Contracts",
+      value: totalContracts || 0,
+      description: `${signedContracts || 0} signed`,
+      icon: FileText,
+      color: "text-blue-600",
+      bgColor: "bg-blue-50",
+    },
+    {
+      title: "Payments",
+      value: paidTransactions || 0,
+      description: "Paid transactions",
+      icon: BarChart3,
+      color: "text-green-600",
+      bgColor: "bg-green-50",
     },
   ]
 
@@ -284,7 +323,61 @@ export default async function AdminDashboard() {
                   </div>
                 </Button>
               </Link>
+
+              <Link href="/admin/contracts">
+                <Button variant="outline" className="w-full justify-start h-auto p-4 bg-transparent">
+                  <div className="flex items-center space-x-3">
+                    <div className="p-2 bg-blue-50 rounded-full">
+                      <FileText className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <div className="text-left">
+                      <div className="font-medium">Manage Contracts</div>
+                      <div className="text-sm text-muted-foreground">Templates, creation, tracking</div>
+                    </div>
+                  </div>
+                </Button>
+              </Link>
+
+              <Link href="/api/contracts/export?download=1">
+                <Button variant="outline" className="w-full justify-start h-auto p-4 bg-transparent">
+                  <div className="flex items-center space-x-3">
+                    <div className="p-2 bg-green-50 rounded-full">
+                      <TrendingUp className="h-5 w-5 text-green-600" />
+                    </div>
+                    <div className="text-left">
+                      <div className="font-medium">Export Contracts CSV</div>
+                      <div className="text-sm text-muted-foreground">Download report</div>
+                    </div>
+                  </div>
+                </Button>
+              </Link>
             </div>
+          </CardContent>
+        </Card>
+      </div>
+      {/* Admin Actions */}
+      <div className="grid md:grid-cols-2 gap-6 mt-8 animate-fadeInUp3d hover-lift">
+        <Card>
+          <CardHeader>
+            <CardTitle>Settings</CardTitle>
+            <CardDescription>Configure payment provider and BoldSign later</CardDescription>
+          </CardHeader>
+          <CardContent className="flex gap-4">
+            <Link href="/admin/settings/payment">
+              <Button>Payment Settings</Button>
+            </Link>
+          </CardContent>
+        </Card>
+      
+        <Card>
+          <CardHeader>
+            <CardTitle>Operations</CardTitle>
+            <CardDescription>Manual charges and contract sending queue</CardDescription>
+          </CardHeader>
+          <CardContent className="flex gap-4">
+            <Link href="/admin/billing">
+              <Button>Billing & Contracts</Button>
+            </Link>
           </CardContent>
         </Card>
       </div>

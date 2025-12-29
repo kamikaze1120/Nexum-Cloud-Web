@@ -51,6 +51,43 @@ export function ProfileSettings({ profile, user }: ProfileSettingsProps) {
     router.push("/")
   }
 
+  // New local state for password change
+  const [newPassword, setNewPassword] = useState("")
+  const [confirmNewPassword, setConfirmNewPassword] = useState("")
+  const [pwLoading, setPwLoading] = useState(false)
+  const [pwError, setPwError] = useState<string | null>(null)
+  const [pwSuccess, setPwSuccess] = useState(false)
+
+  const handleUpdatePassword = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setPwError(null)
+
+    if (newPassword.length < 6) {
+      setPwError("Password must be at least 6 characters")
+      return
+    }
+    if (newPassword !== confirmNewPassword) {
+      setPwError("Passwords do not match")
+      return
+    }
+
+    setPwLoading(true)
+    try {
+      const { error } = await supabase.auth.updateUser({ password: newPassword })
+      if (error) {
+        setPwError(error.message)
+      } else {
+        setPwSuccess(true)
+        setNewPassword("")
+        setConfirmNewPassword("")
+      }
+    } catch {
+      setPwError("An unexpected error occurred")
+    } finally {
+      setPwLoading(false)
+    }
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -92,6 +129,56 @@ export function ProfileSettings({ profile, user }: ProfileSettingsProps) {
               Sign Out
             </Button>
           </div>
+        </form>
+
+        <hr className="my-6" />
+
+        <form onSubmit={handleUpdatePassword} className="space-y-4">
+          <div>
+            <CardTitle className="text-lg">Change Password</CardTitle>
+            <CardDescription>Set a new password for your account</CardDescription>
+          </div>
+
+          {pwError && (
+            <Alert variant="destructive">
+              <AlertDescription>{pwError}</AlertDescription>
+            </Alert>
+          )}
+          {pwSuccess && (
+            <Alert>
+              <AlertDescription>Password updated successfully.</AlertDescription>
+            </Alert>
+          )}
+
+          <div className="space-y-2">
+            <Label htmlFor="newPassword">New Password</Label>
+            <Input
+              id="newPassword"
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              minLength={6}
+              placeholder="Enter a new password"
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="confirmNewPassword">Confirm New Password</Label>
+            <Input
+              id="confirmNewPassword"
+              type="password"
+              value={confirmNewPassword}
+              onChange={(e) => setConfirmNewPassword(e.target.value)}
+              minLength={6}
+              placeholder="Confirm your new password"
+              required
+            />
+          </div>
+
+          <Button type="submit" disabled={pwLoading}>
+            {pwLoading ? "Updating..." : "Update Password"}
+          </Button>
         </form>
       </CardContent>
     </Card>

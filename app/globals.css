@@ -3,52 +3,50 @@
 
 /* Tailwind v4 CSS-first theme tokens */
 @theme {
-  /* Fonts (hooked to Geist variable fonts) */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, "Segoe UI", Roboto, "Noto Sans", "Ubuntu", "Cantarell", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New";
 
-  /* Warm, welcoming palette (OKLCH) */
-  --color-background: oklch(0.985 0.015 90);          /* soft warm cream */
-  --color-foreground: oklch(0.24 0.03 70);            /* warm charcoal */
-  --color-muted: oklch(0.92 0.01 85);                 /* light warm gray */
-  --color-muted-foreground: oklch(0.45 0.02 70);      /* mid warm gray */
+  --color-background: oklch(0.97 0.03 260);
+  --color-foreground: oklch(0.22 0.05 260);
+  --color-muted: oklch(0.92 0.02 250);
+  --color-muted-foreground: oklch(0.50 0.03 260);
 
-  --color-card: oklch(0.99 0.005 90);                 /* near-white card */
+  --color-card: oklch(0.98 0.02 260);
   --color-card-foreground: var(--color-foreground);
 
-  --color-border: oklch(0.9 0.01 85);
+  --color-border: oklch(0.86 0.02 250);
   --color-input: var(--color-border);
-  --color-ring: oklch(0.74 0.12 70);                  /* warm amber ring */
+  --color-ring: oklch(0.78 0.16 280);
 
-  --color-primary: oklch(0.74 0.14 70);               /* amber/orange */
-  --color-primary-foreground: oklch(0.16 0.02 60);    /* deep warm text */
+  --color-primary: oklch(0.72 0.20 285);
+  --color-primary-foreground: oklch(0.16 0.04 280);
 
-  --color-accent: oklch(0.86 0.08 30);                /* soft peach/coral */
-  --color-accent-foreground: oklch(0.22 0.03 60);
+  --color-accent: oklch(0.82 0.12 205);
+  --color-accent-foreground: oklch(0.20 0.03 200);
 
-  --radius: 0.75rem;
+  --radius: 0.9rem;
 }
 
 /* Dark mode — optional via [data-theme="dark"] */
 @layer theme {
   [data-theme="dark"] {
-    --color-background: oklch(0.17 0.02 70);
-    --color-foreground: oklch(0.93 0.02 80);
-    --color-muted: oklch(0.25 0.01 70);
-    --color-muted-foreground: oklch(0.72 0.02 80);
+    --color-background: oklch(0.16 0.05 260);
+    --color-foreground: oklch(0.96 0.02 260);
+    --color-muted: oklch(0.28 0.02 250);
+    --color-muted-foreground: oklch(0.74 0.02 260);
 
-    --color-card: oklch(0.20 0.02 70);
+    --color-card: oklch(0.22 0.03 260);
     --color-card-foreground: var(--color-foreground);
 
-    --color-border: oklch(0.32 0.01 70);
+    --color-border: oklch(0.36 0.02 250);
     --color-input: var(--color-border);
-    --color-ring: oklch(0.78 0.10 70); /* slightly brighter amber */
+    --color-ring: oklch(0.82 0.18 285);
 
-    --color-primary: oklch(0.78 0.12 70);
-    --color-primary-foreground: oklch(0.10 0.01 60);
+    --color-primary: oklch(0.78 0.20 285);
+    --color-primary-foreground: oklch(0.10 0.03 280);
 
-    --color-accent: oklch(0.72 0.09 30);
-    --color-accent-foreground: oklch(0.95 0.02 80);
+    --color-accent: oklch(0.76 0.13 205);
+    --color-accent-foreground: oklch(0.95 0.02 200);
   }
 }
 
@@ -93,9 +91,9 @@
   .particles-bg {
     position: relative;
     background:
-      radial-gradient(1200px 600px at 10% -10%, color-mix(in oklch, var(--color-primary) 12%, transparent), transparent),
-      radial-gradient(1000px 500px at 110% 10%, color-mix(in oklch, var(--color-accent) 10%, transparent), transparent),
-      radial-gradient(900px 500px at 50% 120%, color-mix(in oklch, var(--color-primary) 6%, transparent), transparent)
+      radial-gradient(1200px 600px at 10% -10%, color-mix(in oklch, var(--color-primary) 16%, transparent), transparent),
+      radial-gradient(1000px 500px at 110% 10%, color-mix(in oklch, var(--color-accent) 14%, transparent), transparent),
+      radial-gradient(900px 500px at 50% 120%, color-mix(in oklch, var(--color-primary) 10%, transparent), transparent)
       var(--color-background);
   }
 

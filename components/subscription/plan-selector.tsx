@@ -34,12 +34,27 @@ export function PlanSelector({ plans, currentPlan, billingCycle, onBillingCycleC
   const handleSelectPlan = async (planId: string) => {
     setIsLoading(planId)
     try {
-      // In a real implementation, this would process payment first
-      // For now, we'll just create/update the subscription
       const {
         data: { user },
       } = await supabase.auth.getUser()
-      if (!user) return
+      if (!user) {
+        router.push("/login")
+        return
+      }
+
+      // Require payment confirmation before activation
+      const { data: invoices } = await supabase
+        .from("manual_invoices")
+        .select("*")
+        .eq("customer_email", user.email)
+        .eq("status", "paid")
+        .order("created_at", { ascending: false })
+        .limit(1)
+
+      if (!invoices || invoices.length === 0) {
+        router.push("/payment/confirm")
+        return
+      }
 
       const currentPeriodStart = new Date()
       const currentPeriodEnd = new Date()

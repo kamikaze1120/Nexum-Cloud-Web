@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ecfdf5"/>
+      <stop offset="1" stop-color="#d1fae5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect x="40" y="40" width="1120" height="70" rx="14" fill="#fff" stroke="#e5e7eb"/>
+  <rect x="60" y="60" width="200" height="30" rx="8" fill="#065f46"/>
+  <rect x="280" y="60" width="160" height="30" rx="8" fill="#10b981"/>
+  <rect x="450" y="60" width="160" height="30" rx="8" fill="#10b981"/>
+  <rect x="620" y="60" width="160" height="30" rx="8" fill="#10b981"/>
+
+  <rect x="40" y="130" width="1120" height="420" rx="20" fill="#fff" stroke="#e5e7eb"/>
+  <rect x="60" y="150" width="540" height="380" rx="16" fill="#bbf7d0"/>
+  <rect x="620" y="150" width="520" height="150" rx="16" fill="#065f46"/>
+  <text x="640" y="195" font-size="26" font-family="sans-serif" fill="#ffffff">Welcome to Decorated Green</text>
+  <text x="640" y="228" font-size="18" font-family="sans-serif" fill="#a7f3d0">Transforming your outdoor spaces</text>
+  <rect x="620" y="320" width="240" height="44" rx="10" fill="#22c55e"/>
+  <text x="635" y="348" font-size="20" font-family="sans-serif" fill="#ffffff">Get a Free Quote</text>
+</svg>

@@ -1,3 +1,4 @@
+// Top-level imports for DashboardPage
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -8,6 +9,8 @@ import { ProfileSettings } from "@/components/dashboard/profile-settings"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
 import HomeButton from "@/components/ui/home-button"
+import { CardDescription } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -41,6 +44,14 @@ export default async function DashboardPage() {
     .eq("user_id", user.id)
     .order("billing_date", { ascending: false })
     .limit(10)
+
+  // Placeholder entitlement logic — adjust once you store explicit product entitlements
+  const hasCRMAccess =
+    subscription?.subscription_plans?.entitlements?.includes?.("crm") ||
+    /pro|enterprise|bundle/i.test(subscription?.subscription_plans?.name || "")
+  const hasAutomationAccess =
+    subscription?.subscription_plans?.entitlements?.includes?.("automation") ||
+    /pro|enterprise|bundle/i.test(subscription?.subscription_plans?.name || "")
 
   return (
     <div className="min-h-screen bg-background">
@@ -95,6 +106,36 @@ export default async function DashboardPage() {
         </div>
       </div>
       <Footer />
+      {/* Your Products */}
+      <div className="grid gap-6 mt-10 md:grid-cols-2 animate-fadeInUp3d">
+        <Card className="hover-lift">
+          <CardHeader>
+            <CardTitle>CRM Suite</CardTitle>
+            <CardDescription>Onboarding, profiles, scheduling, billing integration</CardDescription>
+          </CardHeader>
+          <CardContent className="flex items-center justify-between">
+            <Badge variant={hasCRMAccess ? "default" : "secondary"}>{hasCRMAccess ? "Enabled" : "Not in plan"}</Badge>
+            <a href="/products/crm">
+              <Button disabled={!hasCRMAccess}>Open CRM</Button>
+            </a>
+          </CardContent>
+        </Card>
+
+        <Card className="hover-lift">
+          <CardHeader>
+            <CardTitle>Automation Engine</CardTitle>
+            <CardDescription>Rules, triggers, visual workflows, logs</CardDescription>
+          </CardHeader>
+          <CardContent className="flex items-center justify-between">
+            <Badge variant={hasAutomationAccess ? "default" : "secondary"}>
+              {hasAutomationAccess ? "Enabled" : "Not in plan"}
+            </Badge>
+            <a href="/products/automation-engine">
+              <Button disabled={!hasAutomationAccess}>Open Automations</Button>
+            </a>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }

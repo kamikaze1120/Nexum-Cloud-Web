@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#e2e8f0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect x="40" y="40" width="1120" height="70" rx="14" fill="#fff" stroke="#e5e7eb"/>
+  <circle cx="90" cy="75" r="20" fill="#d1d5db"/>
+  <rect x="130" y="60" width="220" height="30" rx="8" fill="#111827"/>
+  <rect x="370" y="60" width="120" height="30" rx="8" fill="#6b7280"/>
+  <rect x="500" y="60" width="120" height="30" rx="8" fill="#6b7280"/>
+  <rect x="630" y="60" width="120" height="30" rx="8" fill="#6b7280"/>
+
+  <rect x="40" y="130" width="720" height="420" rx="20" fill="#fff" stroke="#e5e7eb"/>
+  <rect x="60" y="150" width="680" height="380" rx="16" fill="#ede9fe"/>
+  <rect x="800" y="130" width="360" height="420" rx="20" fill="#fff" stroke="#e5e7eb"/>
+  <rect x="820" y="150" width="320" height="60" rx="10" fill="#111827"/>
+  <text x="840" y="190" font-size="28" font-family="sans-serif" fill="#ffffff">Lily’s Hair Studio</text>
+  <rect x="820" y="230" width="230" height="40" rx="8" fill="#f97316"/>
+  <text x="835" y="257" font-size="20" font-family="sans-serif" fill="#ffffff">Book Appointment</text>
+  <rect x="820" y="280" width="320" height="24" rx="6" fill="#9ca3af" opacity="0.4"/>
+  <rect x="820" y="310" width="320" height="24" rx="6" fill="#9ca3af" opacity="0.35"/>
+  <rect x="820" y="340" width="320" height="24" rx="6" fill="#9ca3af" opacity="0.3"/>
+  <rect x="820" y="370" width="320" height="24" rx="6" fill="#9ca3af" opacity="0.25"/>
+</svg>

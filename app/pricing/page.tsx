@@ -3,11 +3,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Check, X } from "lucide-react"
+import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Pricing - Nexum Cloud",
   description: "Simple, transparent pricing for all your cloud needs",
 }
+
+// Compute Cash App URL from environment variables
+const cashAppUrl = process.env.NEXT_PUBLIC_CASHAPP_URL ||
+  (process.env.NEXT_PUBLIC_CASHAPP_CASHTAG
+    ? `https://cash.app/$${process.env.NEXT_PUBLIC_CASHAPP_CASHTAG.replace(/^\$/,'')}`
+    : undefined)
 
 const plans = [
   {
@@ -27,6 +34,7 @@ const plans = [
     ],
     cta: "Start Free Trial",
     popular: false,
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER || undefined,
   },
   {
     name: "Professional",
@@ -45,6 +53,7 @@ const plans = [
     ],
     cta: "Start Free Trial",
     popular: true,
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO || undefined,
   },
   {
     name: "Enterprise",
@@ -129,9 +138,29 @@ export default function PricingPage() {
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full" variant={plan.popular ? "default" : "outline"} size="lg">
-                    {plan.cta}
-                  </Button>
+                  <div className="flex gap-3">
+                    <Button className="w-full" variant={plan.popular ? "default" : "outline"} size="lg" asChild>
+                      {plan.name !== "Enterprise" ? (
+                        <a
+                          href={cashAppUrl || "/contact"}
+                          target={cashAppUrl ? "_blank" : undefined}
+                          rel={cashAppUrl ? "noopener noreferrer" : undefined}
+                          title={cashAppUrl ? "Pay with Cash App" : "Contact Sales"}
+                        >
+                          {plan.cta}
+                        </a>
+                      ) : (
+                        <Link href="/contact">
+                          {plan.cta}
+                        </Link>
+                      )}
+                    </Button>
+                    {plan.name !== "Enterprise" && (
+                      <Button variant="outline" className="bg-transparent" asChild>
+                        <Link href="/payment/confirm">Already paid?</Link>
+                      </Button>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             ))}

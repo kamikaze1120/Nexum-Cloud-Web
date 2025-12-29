@@ -7,12 +7,14 @@ import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 export default function PlansPage() {
   const [plans, setPlans] = useState([])
   const [currentSubscription, setCurrentSubscription] = useState(null)
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly")
   const [loading, setLoading] = useState(true)
+  const [plansErrorMsg, setPlansErrorMsg] = useState<string | null>(null)
   const supabase = createClient()
   const router = useRouter()
 
@@ -35,8 +37,9 @@ export default function PlansPage() {
           .select("*")
           .order("price_monthly", { ascending: true })
 
-        if (plansError) {
-          console.error("Error loading plans:", plansError)
+        if (plansError && (plansError.message || (plansError as any).code)) {
+          setPlansErrorMsg(plansError.message ?? "Failed to load plans.")
+          console.warn("Error loading plans:", plansError)
         } else {
           setPlans(plansData || [])
         }
@@ -54,7 +57,7 @@ export default function PlansPage() {
 
         setCurrentSubscription(subscriptionData)
       } catch (error) {
-        console.error("Error loading data:", error)
+        console.warn("Error loading data:", error)
       } finally {
         setLoading(false)
       }
@@ -83,6 +86,14 @@ export default function PlansPage() {
     <div className="min-h-screen bg-background particles-bg">
       <Header />
       <HomeButton />
+      {/* Show a non-blocking alert instead of throwing an overlay error */}
+      {plansErrorMsg && (
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+          <Alert variant="destructive">
+            <AlertDescription>{plansErrorMsg}</AlertDescription>
+          </Alert>
+        </div>
+      )}
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
         {/* Hero Section */}
